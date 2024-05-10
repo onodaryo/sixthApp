@@ -23,7 +23,7 @@ class FavoritePlacesNotifer extends StateNotifier<List<Place>>{
 
   bool registerPlace(Place place){
     if(place != null){
-      state.add(place);
+      state = [place, ...state];
       return true;
     }
     return false;
