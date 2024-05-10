@@ -1,6 +1,8 @@
-import 'package:favorite_places/models/place.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
+
+import 'package:favorite_places/models/place.dart';
+import 'package:favorite_places/widgets/imageInput.dart';
 
 class NewPlaceRegister extends StatefulWidget {
   const NewPlaceRegister({super.key});
@@ -14,7 +16,7 @@ class _NewPlaceRegisterState extends State<NewPlaceRegister> {
   final uuid = const Uuid();
   String? _inputPlaceName;
 
-  void _saveItem() async {
+  void _saveItem() {
     if (_formKey.currentState!.validate()) {
       // boolを返す
       _formKey.currentState!.save();
@@ -35,53 +37,57 @@ class _NewPlaceRegisterState extends State<NewPlaceRegister> {
               ),
         ),
       ),
-      body: Form(
-        key: _formKey,
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextFormField(
-                decoration: InputDecoration(
-                  label: Text(
-                    'Title',
-                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                          color: Theme.of(context).colorScheme.onBackground,
-                        ),
-                  ),
-                ),
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.onBackground,
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty || value.length > 50) {
-                    return 'invalid!!!!';
-                  }
-                  return null;
-                },
-                onSaved: (value) {
-                  _inputPlaceName = value;
-                },
-              ),
-              const SizedBox(
-                height: 24,
-              ),
-              ElevatedButton(
-                onPressed: _saveItem,
-                child: const Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.add),
-                    SizedBox(
-                      width: 8,
+      body: SingleChildScrollView(
+        child: Form(
+          key: _formKey,
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextFormField(
+                  decoration: InputDecoration(
+                    label: Text(
+                      'Title',
+                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                            color: Theme.of(context).colorScheme.onBackground,
+                          ),
                     ),
-                    Text('add Place'),
-                  ],
+                  ),
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty || value.length > 50) {
+                      return 'invalid!!!!';
+                    }
+                    return null;
+                  },
+                  onSaved: (value) {
+                    _inputPlaceName = value;
+                  },
                 ),
-              )
-            ],
+                const SizedBox(height: 16,),
+                ImageInput(),
+                const SizedBox(
+                  height: 24,
+                ),
+                ElevatedButton(
+                  onPressed: _saveItem,
+                  child: const Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.add),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      Text('add Place'),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

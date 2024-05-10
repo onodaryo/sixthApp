@@ -15,11 +15,6 @@ class YourPlaces extends ConsumerStatefulWidget {
 
 class _YourPlacesState extends ConsumerState<YourPlaces> {
   List<Place> yourPlaces = [];
-  /*dummy place
-  [
-    Place(id: '0', name: 'test'),
-    Place(id: '1', name: 'test2')
-  ];*/
 
   void _loadPlaceList() {
     final List<Place> loadedList = ref.read(favoritePlacesProvider);
@@ -54,9 +49,6 @@ class _YourPlacesState extends ConsumerState<YourPlaces> {
           );
         },
       ),
-      //MaterialPageRoute(
-      //  builder: (ctx) => const NewPlaceRegister(),
-      //),
     );
     if (place == null) {
       return;
@@ -95,7 +87,7 @@ class _YourPlacesState extends ConsumerState<YourPlaces> {
         background: Container(
           padding: const EdgeInsets.symmetric(vertical: 36),
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.error,
+            color: const Color.fromARGB(255, 173, 0, 0,),// Theme.of(context).colorScheme.error,
             borderRadius: BorderRadius.circular(10),
           ),
         ),
