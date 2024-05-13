@@ -1,7 +1,7 @@
 import 'package:favorite_places/models/place.dart';
 import 'package:flutter/material.dart';
 
-class PlaceScreen extends StatefulWidget {
+class PlaceScreen extends StatelessWidget {
   const PlaceScreen({
     super.key,
     required this.place,
@@ -9,18 +9,13 @@ class PlaceScreen extends StatefulWidget {
   final Place place;
 
   @override
-  State<PlaceScreen> createState() => _PlaceScreenState();
-}
-
-class _PlaceScreenState extends State<PlaceScreen> {
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Hero(
-          tag: widget.place.id,
+          tag: place.id,
           child: Text(
-            widget.place.name,
+            place.name,
             style: Theme.of(context)
                 .textTheme
                 .titleLarge!
@@ -28,14 +23,15 @@ class _PlaceScreenState extends State<PlaceScreen> {
           ),
         ),
       ),
-      body: Center(
-        child: Text(
-            widget.place.name,
-            style: Theme.of(context)
-                .textTheme
-                .titleLarge!
-                .copyWith(color: Theme.of(context).colorScheme.onBackground),
-        ),
+      body: Stack(
+        children: [
+          Image.file(
+            place.image,
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: double.infinity,
+          ),
+        ],
       ),
     );
   }
