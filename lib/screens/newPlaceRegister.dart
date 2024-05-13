@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
@@ -15,13 +17,14 @@ class _NewPlaceRegisterState extends State<NewPlaceRegister> {
   final _formKey = GlobalKey<FormState>();
   final uuid = const Uuid();
   String? _inputPlaceName;
+  File? _selectedImage;
 
   void _saveItem() {
     if (_formKey.currentState!.validate()) {
       // boolを返す
       _formKey.currentState!.save();
-      if (_inputPlaceName != null) {
-        Navigator.of(context).pop(Place(id: uuid.v6(), name: _inputPlaceName!));
+      if (_inputPlaceName != null && _selectedImage != null) {
+        Navigator.of(context).pop(Place(id: uuid.v6(), name: _inputPlaceName!, image: _selectedImage!,),);
       }
     }
   }
@@ -69,7 +72,9 @@ class _NewPlaceRegisterState extends State<NewPlaceRegister> {
                   },
                 ),
                 const SizedBox(height: 16,),
-                ImageInput(),
+                ImageInput(onSelectImage: (image) {
+                  _selectedImage = image;
+                }),
                 const SizedBox(
                   height: 24,
                 ),

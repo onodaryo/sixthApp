@@ -5,6 +5,9 @@ import 'package:favorite_places/models/place.dart';
 import 'package:favorite_places/screens/newPlaceRegister.dart';
 import 'package:favorite_places/widgets/placeItem.dart';
 import 'package:favorite_places/providers/favoritesProvider.dart';
+import 'package:logger/logger.dart';
+
+var logger = Logger();
 
 class YourPlaces extends ConsumerStatefulWidget {
   const YourPlaces({super.key});
@@ -79,6 +82,7 @@ class _YourPlacesState extends ConsumerState<YourPlaces> {
 
   @override
   Widget build(BuildContext context) {
+    logger.d('buildがよばれました.');
     yourPlaces = ref.watch(favoritePlacesProvider);
     Widget contents = ListView.builder(
       itemCount: yourPlaces.length,
